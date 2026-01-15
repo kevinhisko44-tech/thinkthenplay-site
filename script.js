@@ -15,7 +15,7 @@ const ctaAppstore = document.getElementById("ctaAppstore");
 if (ctaDesktop) ctaDesktop.href = APP_LINK;
 if (ctaAppstore) ctaAppstore.href = APP_LINK;
 
-// ---------- Floating CTA behaviour (Desktop QR vs Mobile/Tablet Button) ----------
+// ---------- Floating CTA behaviour (Desktop QR only) ----------
 const qr = document.getElementById("ctaQr");
 const btn = document.getElementById("ctaAppstore");
 
@@ -28,19 +28,17 @@ function isTouchDevice() {
 }
 
 function isLikelyMobileOrTablet() {
-  const smallEnough = window.matchMedia("(max-width: 1024px)").matches;
-  return isTouchDevice() && smallEnough;
+  return window.matchMedia("(max-width: 1024px)").matches && isTouchDevice();
 }
 
 function updateCTA() {
-  if (!qr || !btn) return;
+  // Desktop → show QR
+  if (qr) {
+    qr.style.display = isLikelyMobileOrTablet() ? "none" : "block";
+  }
 
-  const showButton = isLikelyMobileOrTablet();
-  if (showButton) {
-    btn.style.display = "inline-flex";
-    qr.style.display = "none";
-  } else {
-    qr.style.display = "block";
+  // App Store button → ALWAYS hidden
+  if (btn) {
     btn.style.display = "none";
   }
 }
