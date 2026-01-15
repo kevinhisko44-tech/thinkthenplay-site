@@ -176,6 +176,7 @@ img { max-width: 100%; display: block; }
   letter-spacing: -0.03em;
   margin: 20px 0 0 0;
   font-weight: 500;
+  max-width: 720px;   /* controls line wrapping naturally */
 }
 
 /* Device wrapper: overlaps into black section */
