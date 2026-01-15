@@ -3,7 +3,7 @@
 // =========================
 
 // ---------- CONFIG: set your App Store / TestFlight link here ----------
-const APP_LINK = "https://example.com"; // <-- replace with your real link
+const APP_LINK = "coming-soon.html"; // <-- replace with your real link
 
 // ---------- Footer year ----------
 const yearEl = document.getElementById("year");
