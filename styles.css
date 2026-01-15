@@ -1,0 +1,675 @@
+/* =========================
+   styles.css (FULL FILE)
+   ========================= */
+
+/* ---------- Base ---------- */
+:root {
+  --bg: #ffffff;
+  --text: #0b0b0b;
+  --muted: #6b7280;
+  --black: #0b0b0b;
+  --card: rgba(0, 0, 0, 0.75);
+  --stroke: rgba(255, 255, 255, 0.12);
+  --shadow: 0 10px 30px rgba(0, 0, 0, 0.25);
+  --radius: 18px;
+  --max: 1100px;
+}
+
+* { box-sizing: border-box; }
+
+html, body {
+  height: 100%;
+  overflow-x: hidden; /* prevents bottom horizontal scrollbar */
+}
+
+body {
+  margin: 0;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial,
+    "Apple Color Emoji", "Segoe UI Emoji";
+  color: var(--text);
+  background: var(--bg);
+}
+
+img { max-width: 100%; display: block; }
+
+.container {
+  width: min(var(--max), calc(100% - 48px));
+  margin: 0 auto;
+}
+
+.section-title {
+  text-align: center;
+  font-size: clamp(22px, 3vw, 34px);
+  margin: 0 0 100px 0;
+  letter-spacing: -0.02em;
+  font-weight: 500;
+}
+:root {
+  --accent: #D7FF46; /* Play button colour */
+}
+
+/* ---------- Top bar ---------- */
+.topbar {
+  position: sticky;
+  top: 0;
+  z-index: 50;
+  background: rgba(255, 255, 255, 0.85);
+  backdrop-filter: blur(10px);
+  border-bottom: 1px solid rgba(0,0,0,0.06);
+}
+
+.topbar-inner {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 40px 46px;
+  max-width: none;
+}
+
+/* Used on legal pages if you want centered logo */
+.topbar-centered { justify-content: center; }
+
+/* Brand / Logo (fixed top-left like you want) */
+.brand {
+  display: inline-flex;
+  align-items: center;
+  text-decoration: none;
+
+  position: fixed;
+  left: 16px;
+  top: 10px;
+  z-index: 9999;
+}
+
+.brand-mark {
+  width: 60px;
+  height: 60px;
+  border-radius: 8px;
+}
+
+/* App Store badge in header (fixed top-right) */
+.appstore-link {
+  display: inline-flex;
+  align-items: center;
+
+  position: fixed;
+  right: 16px;
+  top: 16px;
+  z-index: 9999;
+}
+
+.appstore-badge {
+  height: 50px;
+  width: auto;
+  display: block;
+}
+
+/* ---------- Floating CTA ---------- */
+.floating-cta {
+  position: fixed;
+  right: 16px;
+  bottom: 16px;
+  z-index: 9999;
+}
+
+#ctaQr, #ctaAppstore { display: none; }
+
+.cta-qr {
+  width: 200px;
+  padding: 12px;
+  border-radius: 16px;
+  background: var(--card);
+  backdrop-filter: blur(10px);
+  border: 1px solid var(--stroke);
+  color: #fff;
+  box-shadow: var(--shadow);
+}
+
+.cta-qr-img {
+  width: 100%;
+  border-radius: 12px;
+  background: #fff;
+  padding: 8px;
+}
+
+.cta-link {
+  display: inline-block;
+  margin-top: 10px;
+  font-size: 12px;
+  color: rgba(255,255,255,0.95);
+  text-decoration: none;
+  border-bottom: 1px solid rgba(255,255,255,0.35);
+}
+
+.cta-appstore {
+  display: inline-flex;
+  align-items: center;
+  padding: 12px 14px;
+  border-radius: 999px;
+  text-decoration: none;
+  background: var(--card);
+  color: #fff;
+  font-weight: 700;
+  border: 1px solid var(--stroke);
+  box-shadow: var(--shadow);
+}
+
+/* ---------- Hero ---------- */
+.hero {
+  padding: 56px 0 0 0;   /* ✅ no extra bottom padding */
+  position: relative;
+  z-index: 10;
+  overflow: visible;
+}
+.hero-inner {
+  display: grid;
+  gap: 22px;
+  justify-items: center;
+  position: relative;
+  overflow: visible; /* important */
+  z-index: 3;
+}
+
+.hero-title {
+  text-align: center;
+  font-size: clamp(22px, 3.2vw, 40px);
+  letter-spacing: -0.03em;
+  margin: 20px 0 0 0;
+  font-weight: 500;
+}
+
+/* Device wrapper: overlaps into black section */
+.hero-device {
+  margin-top: -130px;
+  display: grid;
+  place-items: center;
+  transform: translateY(230px);
+  position: relative;
+  z-index: 50; /* above hero image row */
+}
+
+
+/* Frame container */
+.device-frame {
+  position: relative;
+  width: min(320px, 80vw);
+  overflow: visible;
+    z-index: 60;
+  filter: drop-shadow(0 24px 40px rgba(0,0,0,0.22));
+}
+
+/* Video + fallback */
+.hero-device-video,
+.hero-device-fallback {
+  width: 100%;
+  height: auto;
+  border-radius: 32px;
+  display: block;
+  object-fit: cover;
+  background: #000;
+}
+
+.hero-device-fallback { display: none; }
+
+/* iPhone frame overlay */
+.device-frame-img {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: auto;
+  pointer-events: none;
+  z-index: 5;
+
+  transform-origin: top left;
+  transform: translate(-7%, -2.90%) scaleX(1.15) scaleY(1.04);
+}
+
+/* ---------- HERO IMAGE ROW (full-bleed behind phone) ---------- */
+.hero-media-row {
+  position: relative;
+  width: 100vw;
+  margin-left: calc(50% - 50vw);
+  margin-top: -180px; /* sits closer to phone */
+  z-index: 0;         /* 🔑 LOWER than black section */
+}
+
+.hero-media-track {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  height: 300px; /* tune this */
+}
+
+.hero-media {
+  width: 100%;
+height: 300px; /* tune this */
+  object-fit: cover;
+  display: block;
+  filter: saturate(0.95) contrast(1.05);
+}
+
+/* subtle dark blend to match your reference */
+.hero-media-row::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    to bottom,
+    rgba(0,0,0,0.00) 0%,
+    rgba(0,0,0,0.25) 55%,
+    rgba(0,0,0,0.55) 100%
+  );
+  pointer-events: none;
+}
+
+
+/* ---------- Feature strip ---------- */
+.feature-strip {
+  margin-top: -90px;   /* ✅ pulls black section up behind the phone */
+  background: #0b0b0b;
+  color: #fff;
+  padding: 300px 0 200px 0; /* ✅ enough top padding for phone overlap + content */
+  position: relative;
+  z-index: 1;
+}
+
+.feature-grid {
+  display: grid;
+  gap: 60px;
+  grid-template-columns: repeat(3, 1fr);
+  text-align: center;
+}
+
+.feature-title {
+  margin: 0 0 15px 0;
+  font-size: 24px;
+  font-weight: 500;
+}
+
+.feature-text {
+  margin: 0;
+  font-size: 16px;
+  line-height: 1.45;
+  color: rgba(255,255,255,0.78);
+}
+.feature-eyebrow {
+  display: inline-block;
+  margin-bottom: 10px;
+  font-size: 13px;
+  font-weight: 800;
+  letter-spacing: 0.12em;
+  color: var(--accent);
+}
+
+/* Optional: subtle visual distinction per word */
+.feature-eyebrow.build {
+  opacity: 0.9;
+}
+
+.feature-eyebrow.explore {
+  opacity: 0.85;
+}
+
+.feature-eyebrow.play {
+  opacity: 1;
+}
+/* ---------- Trusted / Carousel (Apple-style scroller) ---------- */
+.trusted {
+  padding: 150px 0 90px 0;
+}
+
+.carousel {
+  position: relative;
+  width: 100vw;
+  margin-left: calc(50% - 50vw);
+  margin-top: 18px;
+}
+
+.carousel-viewport {
+  width: 100%;
+  overflow-x: auto;
+  overflow-y: visible;
+  -webkit-overflow-scrolling: touch;
+  padding: 14px 0;
+  scroll-snap-type: x mandatory;
+  scroll-behavior: smooth;
+  background: transparent;
+}
+
+.carousel-viewport::-webkit-scrollbar { display: none; }
+.carousel-viewport { scrollbar-width: none; }
+
+.carousel-track {
+  display: flex;
+  gap: 96px;
+  padding: 0 24px;
+  align-items: center;
+}
+
+.shot {
+  width: 300px;
+  height: auto;
+  border-radius: 26px;
+  flex: 0 0 auto;
+  scroll-snap-align: start;
+}
+
+.carousel-btn {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 46px;
+  height: 46px;
+  border-radius: 999px;
+  border: 1px solid rgba(0,0,0,0.10);
+  background: rgba(255,255,255,0.92);
+  backdrop-filter: blur(10px);
+  box-shadow: 0 10px 24px rgba(0,0,0,0.14);
+  cursor: pointer;
+  font-size: 26px;
+  line-height: 1;
+  display: grid;
+  place-items: center;
+  z-index: 10;
+}
+
+.carousel-btn[data-dir="-1"] { left: 100px; }
+.carousel-btn[data-dir="1"]  { right: 100px; }
+
+/* Dots */
+.dots {
+  display: flex;
+  justify-content: center;
+  gap: 6px;
+  margin-top: 18px;
+}
+
+.dot {
+  width: 7px;
+  height: 7px;
+  border-radius: 999px;
+  background: rgba(0,0,0,0.18);
+}
+
+.dot.is-active { background: rgba(0,0,0,0.55); }
+
+/* ---------- Anywhere strip ---------- */
+.anywhere {
+  margin-top: 34px;
+  background: #0b0b0b;
+  color: #fff;
+  padding: 200px 0;
+}
+
+.pill-row {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 10px;
+}
+
+.pill {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 10px 16px;
+  border-radius: 15px;
+  font-weight: 600;
+  font-size: 20px;
+  background: #ffffff;
+  color: #0b0b0b;
+  border: 1px solid rgba(0,0,0,0.12);
+  white-space: nowrap;
+}
+
+/* ---------- FAQ ---------- */
+.faq {
+  padding: 70px 0 100px 0;
+}
+
+.accordion {
+  max-width: 760px;
+  margin: 0 auto;
+  border-top: 1px solid rgba(0,0,0,0.10);
+}
+
+.acc-item {
+  width: 100%;
+  display: grid;
+  grid-template-columns: 18px 1fr;
+  gap: 12px;
+  align-items: center;
+  text-align: left;
+  padding: 16px 6px;
+  border: 0;
+  border-bottom: 1px solid rgba(0,0,0,0.10);
+  background: transparent;
+  cursor: pointer;
+  font-size: 16px;
+  font-weight: 700;
+}
+
+.acc-plus {
+  font-size: 18px;
+  color: rgba(0,0,0,0.55);
+}
+
+.acc-panel {
+  max-width: 760px;
+  margin: 0 auto;
+  padding: 0 6px 16px 36px;
+  display: none;
+  color: rgba(0,0,0,0.72);
+  line-height: 1.5;
+  font-size: 16px;
+}
+
+.acc-panel.is-open { display: block; }
+
+.faq-bullets {
+  margin: 10px 0 14px 0;
+  padding-left: 18px;
+}
+
+.faq-bullets li {
+  margin: 6px 0;
+}
+
+
+
+
+
+
+
+/* ---------- Footer ---------- */
+.footer {
+  background: #0b0b0b;
+  color: rgba(255,255,255,0.70);
+  padding: 50px 0;
+}
+
+.footer-inner {
+  display: grid;
+  gap: 14px;
+  justify-items: center;
+}
+
+.footer-links {
+  display: flex;
+  gap: 18px;
+}
+
+.footer-link {
+  color: rgba(255,255,255,0.72);
+  text-decoration: none;
+  font-weight: 700;
+  font-size: 12px;
+}
+
+.footer-copy {
+  font-size: 12px;
+}
+
+/* ---------- Reasons grid (image + text checkerboard) ---------- */
+.reasons {
+  padding: 110px 0 70px 0;
+  background: #fff;
+}
+
+.reasons .section-title {
+  margin-bottom: 100px;
+}
+
+.reasons-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 26px;
+}
+
+/* Base tile */
+.reason-tile {
+  border-radius: 0;
+  background: #fff;
+}
+
+/* Image tiles: perfect squares */
+.reason-tile.is-media {
+  aspect-ratio: 1 / 1;
+  overflow: hidden;
+}
+
+.reason-tile.is-media img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+/* Text tiles */
+.reason-tile.is-text {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: 22px 18px;
+}
+
+.reason-tile.is-text h3 {
+  margin: 0 0 10px 0;
+  font-size: 20px;
+  font-weight: 800;
+  letter-spacing: -0.01em;
+  color: #0b0b0b;
+}
+
+.reason-tile.is-text p {
+  margin: 0;
+  font-size: 16px;
+  line-height: 1.45;
+  color: rgba(0,0,0,0.72);
+  max-width: 32ch;
+}
+
+/* Tablet: 2 columns */
+@media (max-width: 900px) {
+  .reasons-grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 18px;
+  }
+}
+
+/* Phone: 1 column */
+@media (max-width: 520px) {
+  .reasons {
+    padding: 70px 0 40px 0;
+  }
+
+  .reasons-grid {
+    grid-template-columns: 1fr;
+    gap: 14px;
+  }
+
+  .reason-tile.is-text {
+    padding: 18px 14px;
+  }
+
+  .reason-tile.is-text p {
+    max-width: none;
+  }
+}
+
+/* ---------- Responsive ---------- */
+
+/* Hide QR on mobile */
+@media (max-width: 768px) {
+  #ctaQr { display: none !important; }
+   .hero-media-track {
+    grid-template-columns: repeat(4, 1fr); /* keep 4 images across */
+    height: 180px;                          /* smaller but still visible */
+  }
+
+  .hero-media {
+    height: 180px;
+  }
+}
+
+/* Tablet */
+@media (max-width: 900px) {
+  .feature-grid { grid-template-columns: 1fr; }
+
+  .shot { width: 240px; }
+  .carousel-track { gap: 40px; padding: 0 18px; }
+  .carousel-btn[data-dir="-1"] { left: 22px; }
+  .carousel-btn[data-dir="1"] { right: 22px; }
+
+  .hero-media-track {
+    grid-template-columns: repeat(5, 1fr);
+  
+  }
+
+    /* 1) When the feature cards stack, push them down so they clear the phone */
+  .feature-strip {
+    padding-top: 520px;   /* increase until there’s no overlap (try 480–620) */
+    padding-bottom: 180px;
+  }
+
+  /* 2) Optional: reduce how far the phone drops on smaller screens */
+  .hero-device {
+    transform: translateY(280px);  /* was 330px in your current css */
+  }
+}
+
+/* Phone */
+@media (max-width: 520px) {
+  .topbar-inner { padding: 40px 46px; }
+
+  .hero { padding-top: 40px; }
+
+  .hero-device {
+    margin-top: -100px;
+    transform: translateY(200px);
+  }
+.feature-strip {
+        padding-top: 400px;
+    }
+  .device-frame { width: min(280px, 90vw); }
+
+  .hero-device-video,
+  .hero-device-fallback {
+    border-radius: 28px;
+  }
+
+ .hero-media-row {
+    display: none;
+  }
+
+  .hero-media-track {
+      display: none;                       /* smaller */
+  }
+
+  .hero-media {
+    display: none;
+  }
+
+  .shot { width: 210px; }
+  .carousel-btn { display: none; }
+}
