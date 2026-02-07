@@ -1,0 +1,553 @@
+/* =========================
+   forhockey.css (FULL FILE)
+   Tuned to match homepage style + hero overlap
+   (Update: side players behind phone + closer to edges)
+   ========================= */
+
+/* ---------- Base ---------- */
+:root{
+  --bg:#ffffff;
+  --text:#0b0b0b;
+  --muted:#6b7280;
+  --black:#0b0b0b;
+  --card:rgba(0,0,0,.75);
+  --stroke:rgba(255,255,255,.12);
+  --shadow:0 10px 30px rgba(0,0,0,.25);
+  --radius:18px;
+  --max:1100px;
+  --accent:#D7FF46;
+
+  /* ForHockey hero side-art tuning */
+  --fh-side-art-size: min(420px, 34vw);      /* bigger players */
+  --fh-side-art-lift: 120px;                 /* move UP */
+  --fh-side-art-inset: clamp(8px, 2vw, 16px);/* closer to page edges */
+  
+}
+
+*{box-sizing:border-box;}
+html,body{height:100%; overflow-x:hidden;}
+body{
+  margin:0;
+  font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,"Apple Color Emoji","Segoe UI Emoji";
+  color:var(--text);
+  background:var(--bg);
+}
+img{max-width:100%; display:block;}
+
+.container{
+  width:min(var(--max), calc(100% - 48px));
+  margin:0 auto;
+}
+
+/* ---------- Top bar ---------- */
+.topbar{
+  position:sticky;
+  top:0;
+  z-index:50;
+  background:rgba(255,255,255,.85);
+  backdrop-filter:blur(10px);
+  border-bottom:1px solid rgba(0,0,0,.06);
+}
+.topbar-inner{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  padding:40px 46px;
+  max-width:none;
+}
+
+/* Brand fixed top-left */
+.brand{
+  display:inline-flex;
+  align-items:center;
+  text-decoration:none;
+  position:fixed;
+  left:16px;
+  top:10px;
+  z-index:9999;
+}
+.brand-mark{
+  width:60px;
+  height:60px;
+  border-radius:8px;
+}
+
+/* App Store badge fixed top-right */
+.appstore-link{
+  display:inline-flex;
+  align-items:center;
+  position:fixed;
+  right:16px;
+  top:16px;
+  z-index:9999;
+}
+.appstore-badge{
+  height:50px;
+  width:auto;
+}
+
+/* ---------- Floating CTA ---------- */
+.floating-cta{
+  position:fixed;
+  right:16px;
+  bottom:16px;
+  z-index:9999;
+}
+#ctaQr,#ctaAppstore{display:none;}
+
+.cta-qr{
+  width:200px;
+  padding:12px;
+  border-radius:16px;
+  background:var(--card);
+  backdrop-filter:blur(10px);
+  border:1px solid var(--stroke);
+  color:#fff;
+  box-shadow:var(--shadow);
+}
+.cta-qr-img{
+  width:100%;
+  border-radius:12px;
+  background:#fff;
+  padding:8px;
+}
+.cta-link{
+  display:inline-block;
+  margin-top:10px;
+  font-size:12px;
+  color:rgba(255,255,255,.95);
+  text-decoration:none;
+  border-bottom:1px solid rgba(255,255,255,.35);
+}
+.cta-appstore{
+  display:inline-flex;
+  align-items:center;
+  padding:12px 14px;
+  border-radius:999px;
+  text-decoration:none;
+  background:var(--card);
+  color:#fff;
+  font-weight:800;
+  border:1px solid var(--stroke);
+  box-shadow:var(--shadow);
+}
+
+/* ---------- Typography helpers ---------- */
+.fh-title{
+  text-align:center;
+  font-size:clamp(22px, 3.2vw, 40px);
+  letter-spacing:-0.03em;
+  margin:22px auto 0;
+  font-weight:500;
+  max-width:820px;
+  line-height:1.08;
+}
+
+.fh-h2{
+  font-size:clamp(22px, 2.4vw, 32px);
+  letter-spacing:-0.02em;
+  margin:0;
+  font-weight:600;
+  line-height:1.15;
+}
+.fh-h3{
+  font-size:16px;
+  letter-spacing:-0.01em;
+  margin:20px 0 10px;
+  font-weight:800;
+}
+.fh-lead{
+  margin:14px 0 0;
+  font-size:16px;
+  line-height:1.55;
+  color:rgba(0,0,0,.72);
+  max-width:56ch;
+}
+
+/* ---------- HERO ---------- */
+.fh-hero{
+  position:relative;
+  overflow:visible;
+  z-index:10;
+}
+
+.fh-hero-top{
+  padding:56px 0 0;
+  position:relative;
+  z-index:3;
+  overflow:visible;
+}
+
+/* stage = 3-column grid (LEFT | PHONE | RIGHT) */
+.fh-hero-stage{
+  display:grid;
+  grid-template-columns: 1fr minmax(260px, 380px) 1fr;
+  align-items:end;
+  gap:24px;
+  margin-top:22px;
+
+  /* ✅ hard centre the whole 3-column unit */
+  width:min(var(--max), 100%);
+  margin-inline:auto;
+}
+
+/* ✅ sides are real grid items, but anchor to OUTER edges */
+.fh-side{
+  position:relative;
+  min-height:320px;
+  display:flex;
+  align-items:flex-end;
+  pointer-events:none;
+  z-index:10; /* behind phone */
+}
+
+/* ✅ push left art toward the LEFT edge (outer edge of left column) */
+.fh-left{
+  justify-content:flex-end;            /* anchor art to right edge of left column */
+  justify-self:stretch;
+  padding-right:0;                     /* no inward padding */
+  padding-left: var(--fh-side-art-inset); /* small page-edge breathing room */
+}
+
+/* ✅ push right art toward the RIGHT edge (outer edge of right column) */
+.fh-right{
+  justify-content:flex-start;          /* anchor art to left edge of right column */
+  justify-self:stretch;
+  padding-left:0;                      /* no inward padding */
+  padding-right: var(--fh-side-art-inset); /* small page-edge breathing room */
+}
+
+/* ✅ illustration size + lift (BEHIND phone) */
+.fh-illustration{
+  width: var(--fh-side-art-size);
+  max-width: 520px;
+  height:auto;
+  opacity:.95;
+  transform: translateY(calc(-1 * var(--fh-side-art-lift)));
+  transform-origin: bottom center;
+  position:relative;
+  z-index:10;
+}
+
+/* ✅ phone stays dead-centre, on top */
+.fh-phone{
+  position:relative;
+  z-index:50;
+  transform:translateY(110px);
+  display:grid;
+  justify-items:center;
+  grid-column:2;
+  justify-self:center;
+  margin-inline:auto;
+}
+
+/* device frame (topmost layer) */
+.fh-device{
+  position:relative;
+  width:min(320px, 82vw);
+  overflow:visible;
+  z-index:60;
+  filter:drop-shadow(0 24px 40px rgba(0,0,0,.22));
+}
+.fh-device-screen{
+  width:100%;
+  height:auto;
+  border-radius:32px;
+  background:#d9d9d9;
+  display:block;
+}
+.fh-device-frame{
+  position:absolute;
+  top:0; left:0;
+  width:100%;
+  height:auto;
+  pointer-events:none;
+  z-index:65; /* ensure frame always on top */
+  transform-origin:top left;
+  transform:translate(-7%, -2.90%) scaleX(1.15) scaleY(1.04);
+}
+
+/* ---------- Black band under hero (UNCHANGED) ---------- */
+.fh-hero-band{
+  background:#0b0b0b;
+  color:#fff;
+  position:relative;
+  z-index:1;
+  margin-top:-90px;
+  padding:170px 0 92px;
+}
+.fh-band-inner{
+  display:flex;
+  align-items:flex-start;
+  justify-content:space-between;
+  gap:30px;
+}
+
+.fh-quote{ margin:0; max-width:720px; }
+.fh-quote p{
+  margin:0 0 18px;
+  font-size:15px;
+  line-height:1.6;
+  color:rgba(255,255,255,.86);
+}
+.fh-quote footer{
+  font-size:12px;
+  color:rgba(255,255,255,.72);
+  line-height:1.4;
+}
+.fh-quote strong{ color:rgba(255,255,255,.95); }
+
+.fh-qr{
+  width:150px;
+  min-width:150px;
+  display:grid;
+  gap:10px;
+  justify-items:center;
+  text-align:center;
+}
+.fh-qr img{
+  width:140px;
+  background:#fff;
+  border-radius:12px;
+  padding:8px;
+}
+.fh-qr-link{
+  font-size:12px;
+  color:rgba(255,255,255,.85);
+  text-decoration:none;
+  border-bottom:1px solid rgba(255,255,255,.3);
+}
+
+/* ---------- Sections ---------- */
+.fh-section{ padding:84px 0; }
+.fh-section-grey{ background:#f4f5f7; }
+.fh-section-head{
+  text-align:left;
+  max-width:980px;
+  margin:0 auto 28px;
+}
+
+/* ---------- Drill row ---------- */
+.fh-card-row{
+  display:grid;
+  grid-template-columns: 44px 260px 1fr 260px 44px;
+  gap:18px;
+  align-items:start;
+}
+
+.fh-nav{
+  width:44px;
+  height:44px;
+  border-radius:999px;
+  border:1px solid rgba(0,0,0,.10);
+  background:rgba(255,255,255,.92);
+  backdrop-filter:blur(10px);
+  box-shadow:0 10px 24px rgba(0,0,0,.10);
+  cursor:pointer;
+  font-size:26px;
+  line-height:1;
+  display:grid;
+  place-items:center;
+  margin-top:70px;
+}
+
+.fh-card{
+  background:#fff;
+  border-radius:18px;
+  overflow:hidden;
+  box-shadow:0 16px 40px rgba(0,0,0,.08);
+  border:1px solid rgba(0,0,0,.06);
+}
+.fh-card img{ width:100%; height:auto; display:block; }
+.fh-card-meta{ padding:10px 12px 12px; display:grid; gap:2px; }
+.fh-card-title{ font-weight:800; font-size:12px; color:rgba(0,0,0,.86); }
+.fh-card-sub{ font-size:11px; color:rgba(0,0,0,.55); }
+
+.fh-card-wide{ padding:0; }
+.fh-card-caption{
+  margin:0;
+  padding:14px 16px 18px;
+  font-size:14px;
+  line-height:1.55;
+  color:rgba(0,0,0,.70);
+}
+
+/* ---------- Two column (Habits) ---------- */
+.fh-two-col{
+  display:grid;
+  grid-template-columns: 1.15fr .85fr;
+  gap:44px;
+  align-items:center;
+}
+.fh-badge{
+  width:44px; height:44px;
+  border-radius:12px;
+  overflow:hidden;
+  box-shadow:0 12px 26px rgba(0,0,0,.10);
+  margin-bottom:16px;
+}
+.fh-badge img{ width:100%; height:100%; object-fit:cover; }
+
+.fh-list{
+  margin:12px 0 0;
+  padding-left:18px;
+  color:rgba(0,0,0,.72);
+  line-height:1.6;
+  font-size:15px;
+}
+.fh-list li{ margin:8px 0; }
+
+.fh-phone-angled{
+  width:min(360px, 92%);
+  margin-left:auto;
+  border-radius:22px;
+  overflow:hidden;
+  box-shadow:0 24px 50px rgba(0,0,0,.12);
+  border:1px solid rgba(0,0,0,.08);
+}
+
+/* ---------- Mini row ---------- */
+.fh-mini-row{
+  display:grid;
+  grid-template-columns: 44px repeat(4, 1fr) 44px;
+  gap:16px;
+  align-items:start;
+}
+
+.fh-mini{
+  background:#fff;
+  border-radius:18px;
+  overflow:hidden;
+  box-shadow:0 16px 40px rgba(0,0,0,.08);
+  border:1px solid rgba(0,0,0,.06);
+}
+.fh-mini img{ width:100%; height:auto; display:block; }
+.fh-mini-meta{ padding:10px 12px 12px; display:grid; gap:2px; }
+.fh-mini-title{ font-weight:800; font-size:12px; color:rgba(0,0,0,.86); }
+.fh-mini-sub{ font-size:11px; color:rgba(0,0,0,.55); }
+
+/* ---------- Place anywhere ---------- */
+.fh-place-title{
+  text-align:left;
+  max-width:980px;
+  margin:0 auto 26px;
+}
+.fh-place-row{
+  display:grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap:0;
+  width:100vw;
+  margin-left:calc(50% - 50vw);
+}
+.fh-place-row img{
+  width:100%;
+  height:320px;
+  object-fit:cover;
+  display:block;
+}
+
+/* ---------- Footer ---------- */
+.footer{
+  background:#0b0b0b;
+  color:rgba(255,255,255,.70);
+  padding:50px 0;
+}
+.footer-inner{ display:grid; gap:14px; justify-items:center; }
+.footer-links{ display:flex; gap:18px; }
+.footer-link{
+  color:rgba(255,255,255,.72);
+  text-decoration:none;
+  font-weight:800;
+  font-size:12px;
+}
+.footer-copy{ font-size:12px; }
+
+/* ---------- Responsive ---------- */
+@media (max-width: 980px){
+  .fh-hero-stage{
+    grid-template-columns: 1fr minmax(240px, 340px) 1fr;
+    gap:16px;
+  }
+
+  :root{
+    --fh-side-art-size: min(360px, 42vw);
+    --fh-side-art-lift: 105px;
+    --fh-side-art-inset: clamp(6px, 2vw, 12px);
+  }
+
+  .fh-card-row{
+    grid-template-columns: 44px 220px 1fr 220px 44px;
+  }
+
+  .fh-two-col{
+    grid-template-columns: 1fr;
+    gap:26px;
+  }
+  .fh-phone-angled{ margin:0; }
+}
+
+@media (max-width: 820px){
+  #ctaQr{ display:none !important; }
+  #ctaAppstore{ display:inline-flex; }
+
+  .fh-band-inner{
+    flex-direction:column;
+    align-items:flex-start;
+  }
+
+  .fh-hero-stage{
+    grid-template-columns: 1fr;
+    justify-items:center;
+  }
+
+  .fh-side{ display:none; }
+  .fh-phone{ transform:translateY(95px); }
+
+  .fh-hero-band{
+    margin-top:-70px;
+    padding-top:150px;
+  }
+
+  .fh-card-row{
+    grid-template-columns: 1fr;
+    gap:16px;
+  }
+  .fh-nav{ display:none; }
+
+  .fh-mini-row{
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .fh-place-row img{ height:260px; }
+}
+
+@media (max-width: 520px){
+  .topbar-inner{ padding:40px 46px; }
+
+  .fh-title{
+    max-width: 520px;
+    line-height:1.1;
+  }
+
+  .fh-device{ width:min(290px, 92vw); }
+  .fh-device-screen{ border-radius:28px; }
+
+  .fh-phone{ transform:translateY(85px); }
+
+  .fh-hero-band{
+    margin-top:-64px;
+    padding-top:140px;
+    padding-bottom:80px;
+  }
+
+  .fh-section{ padding:68px 0; }
+  .fh-place-row{ grid-template-columns:1fr; }
+  .fh-place-row img{ height:240px; }
+}
+
+/* ---------------------------------------------------------
+   Notes:
+   - Players behind phone: fh-side z-index 10, fh-phone z-index 50
+   - Closer to edges: --fh-side-art-inset (viewport-based clamp)
+   - Band unchanged
+   --------------------------------------------------------- */
