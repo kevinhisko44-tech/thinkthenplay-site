@@ -100,26 +100,118 @@
     <main>
       <!-- HERO -->
       <section class="fh-hero">
-        <div class="container fh-hero-top">
-          <h1 class="fh-title">
-            A new way for hockey coaches to train<br />
-            scanning, thinking, and smarter play
-          </h1>
+        <!-- ✅ Title + subnav stay in the container -->
+        <div class="container">
+          <h1 class="fh-title">A New Way to Train Scanning, Thinking,<br />and Smarter Play.</h1>
 
-         <div class="fh-hero-stage">
-  <div class="fh-side fh-left">
-    <img class="fh-illustration" src="assets/images/forhockey/player-left.png" alt="Skater illustration (left)" />
-  </div>
+          <nav class="fh-subnav" aria-label="Page sections">
+            <a href="#on-ice">On Ice</a>
+            <a href="#dryland">Dryland</a>
+            <a href="#at-home">At Home Drills</a>
+            <a href="#for-coaches">For Coaches &amp; Trainers</a>
+            <a href="#how-it-works">How it Works</a>
+          </nav>
+        </div>
 
-  <div class="fh-phone">
-    <div class="fh-device">
-      <img src="assets/images/forhockey/hero-screen.png" alt="Think Then Play app screen" class="fh-device-screen" />
-      <img src="assets/images/iphone-frame.png" alt="" aria-hidden="true" class="fh-device-frame" />
-    </div>
-  </div>
-            <div class="fh-side fh-right">
-              <img class="fh-illustration" src="assets/images/forhockey/player-right.png" alt="Skater illustration" />
+        <!-- ✅ FULL-BLEED HERO TILE ROW (aligns first tile with container edge) -->
+        <div class="fh-bleed fh-hero-tiles" aria-label="Highlights">
+          <div class="fh-tile-row">
+            <button
+              class="fh-row-nav fh-row-prev"
+              type="button"
+              aria-label="Previous"
+              data-scroll-target="#heroTiles"
+            >
+              ‹
+            </button>
+
+            <div class="fh-scroller fh-tiles" id="heroTiles">
+
+               <!-- Tile 4 -->
+              <article class="fh-tile fh-tile-light">
+                <div class="fh-tile-body">
+                  <h3 class="fh-tile-title">On Ice Training</h3>
+                  <p class="fh-tile-text">Add scanning and decision-making to any drill — without slowing practice down.</p>
+                </div>
+                <div class="fh-tile-media fh-tile-media-bottom">
+                  <img src="assets/images/forhockey/tile-1.png" alt="At home training tile" />
+                </div>
+              </article>
+
+               <!-- Tile 5 (dark) -->
+              <article class="fh-tile fh-tile-dark">
+                <div class="fh-tile-body">
+                    <div class="fh-tile-eyebrow">Build Training Screens</div>
+                       <h3 class="fh-tile-title">Add to any drill on or off ice. Build Hockey IQ. </h3>
+                </div>
+                <div class="fh-tile-media fh-tile-media-bottom">
+                  <img src="assets/images/forhockey/tile-5.png" alt="Build training screens tile" />
+                </div>
+              </article>
+
+               <!-- Tile 4 -->
+              <article class="fh-tile fh-tile-light">
+                <div class="fh-tile-body">
+                  <h3 class="fh-tile-title">At Home Training</h3>
+                  <p class="fh-tile-text">Train at home with your head up, scanning and reacting.</p>
+                </div>
+                <div class="fh-tile-media fh-tile-media-bottom">
+                  <img src="assets/images/forhockey/tile-4.png" alt="At home training tile" />
+                </div>
+              </article>
+
+              <!-- Tile 2 (dark) -->
+              <article class="fh-tile fh-tile-dark">
+                <div class="fh-tile-body">
+                  <div class="fh-tile-eyebrow">Play Games</div>
+                  <h3 class="fh-tile-title">
+                    Use our games to sharpen peripheral vision, reaction speed, and brain performance.
+                  </h3>
+                </div>
+                <div class="fh-tile-media fh-tile-media-bottom">
+                  <img src="assets/images/forhockey/tile-2.png" alt="Play games tile" />
+                </div>
+              </article>
+
+                  <!-- Tile 4 -->
+              <article class="fh-tile fh-tile-light">
+                <div class="fh-tile-body">
+                  <h3 class="fh-tile-title">At Home Training</h3>
+                  <p class="fh-tile-text">Train at home with your head up, scanning and reacting.</p>
+                </div>
+                <div class="fh-tile-media fh-tile-media-bottom">
+                  <img src="assets/images/forhockey/tile-4.png" alt="At home training tile" />
+                </div>
+              </article>
+
+
+              <!-- Tile 2 (dark) -->
+              <article class="fh-tile fh-tile-dark">
+                <div class="fh-tile-body">
+                  <div class="fh-tile-eyebrow">Get Drills</div>
+                  <h3 class="fh-tile-title">
+                    Tap into our expanding library of on-ice and off-ice drills.
+                  </h3>
+                </div>
+                <div class="fh-tile-media fh-tile-media-bottom">
+                  <img src="assets/images/forhockey/tile-3.png" alt="Play games tile" />
+                </div>
+              </article>
+             
+
+             
+
+             
             </div>
+
+            <button
+              class="fh-row-nav fh-row-next"
+              type="button"
+              aria-label="Next"
+              data-scroll-target="#heroTiles"
+            >
+              ›
+            </button>
           </div>
         </div>
 
@@ -128,159 +220,223 @@
           <div class="container fh-band-inner">
             <blockquote class="fh-quote">
               <p>
-                “The app helps us train how players scan and take in information, not just how they move.
-                It’s become one of the most fun and engaging tools we use — on and off the ice.”
+                “We started using this to get our players’ heads up more, and it’s made a difference. They’re scanning earlier and making better decisions under pressure.”
               </p>
               <footer>
                 <strong>Hockey Coach</strong><br />
                 <span>U12 Newmarket Renegades</span>
               </footer>
             </blockquote>
-
-            <div class="fh-qr">
-              <img src="assets/images/qr.png" alt="QR code to download Think Then Play" />
-              <a href="#" target="_blank" rel="noopener" class="fh-qr-link">Open link</a>
-            </div>
           </div>
         </section>
       </section>
 
-      <!-- SECTION 1: DRILLS (carousel-like row) -->
-      <section class="fh-section fh-section-grey">
+      <!-- SECTION: ON ICE DRILLS -->
+      <section class="fh-section" id="on-ice">
         <div class="container">
           <div class="fh-section-head">
-            <h2 class="fh-h2">
-              Create custom on-ice drills or use pre-built sessions designed for flow, scanning, and decision-making
-            </h2>
+            <h2 class="fh-h2">On Ice Drills Designed for Flow, Scanning, and Decision-Making.</h2>
           </div>
+        </div>
 
-          <div class="fh-card-row" aria-label="Drill examples">
-            <button class="fh-nav" type="button" aria-label="Previous">‹</button>
+        <!-- ✅ FULL-BLEED DRILLS ROW -->
+        <div class="fh-bleed">
+          <div class="fh-tile-row" aria-label="On-ice drill examples">
+            <button class="fh-row-nav fh-row-prev" type="button" aria-label="Previous" data-scroll-target="#drillsRow">‹</button>
 
-            <div class="fh-card">
-              <img src="assets/images/forhockey/drill-1.png" alt="Drill example video" />
-              <div class="fh-card-meta">
-                <span class="fh-card-title">Scan • Store • Skate</span>
-                <span class="fh-card-sub">Coach K</span>
-              </div>
+            <div class="fh-scroller fh-video-row" id="drillsRow">
+              <article class="fh-video-card">
+                <div class="fh-card-video">
+                  <video class="cf-video" playsinline muted loop preload="metadata"
+                    data-hls="https://customer-hev71calbt8qvapr.cloudflarestream.com/cfd2198df7d205910f7d1cfbff7f70d6/manifest/video.m3u8"></video>
+                </div>
+                <div class="fh-video-meta">
+                  <div class="fh-video-title">Numbers = Heads Up</div>
+                  <div class="fh-video-sub">Coach K</div>
+                </div>
+              </article>
+
+              <article class="fh-video-card">
+                <div class="fh-card-video">
+                  <video class="cf-video" playsinline muted loop preload="metadata"
+                    data-hls="https://customer-hev71calbt8qvapr.cloudflarestream.com/cfd2198df7d205910f7d1cfbff7f70d6/manifest/video.m3u8"></video>
+                </div>
+                <div class="fh-video-meta">
+                  <div class="fh-video-title">Triangle Trigger</div>
+                  <div class="fh-video-sub">Coach K</div>
+                </div>
+              </article>
+
+              <article class="fh-video-card">
+                <div class="fh-card-video">
+                  <video class="cf-video" playsinline muted loop preload="metadata"
+                    data-hls="https://customer-hev71calbt8qvapr.cloudflarestream.com/cfd2198df7d205910f7d1cfbff7f70d6/manifest/video.m3u8"></video>
+                </div>
+                <div class="fh-video-meta">
+                  <div class="fh-video-title">Scan • Shoot • Skate</div>
+                  <div class="fh-video-sub">Coach K</div>
+                </div>
+              </article>
+
+              <article class="fh-video-card">
+                <div class="fh-card-video">
+                  <video class="cf-video" playsinline muted loop preload="metadata"
+                    data-hls="https://customer-hev71calbt8qvapr.cloudflarestream.com/cfd2198df7d205910f7d1cfbff7f70d6/manifest/video.m3u8"></video>
+                </div>
+                <div class="fh-video-meta">
+                  <div class="fh-video-title">Triple Read Rush</div>
+                  <div class="fh-video-sub">Coach K</div>
+                </div>
+              </article>
             </div>
 
-            <div class="fh-card fh-card-wide">
-              <img src="assets/images/forhockey/drill-diagram.png" alt="Drill diagram example" />
-              <p class="fh-card-caption">
-                Think Then Play fits seamlessly into flow drills by training players to scan, read, and react
-                while moving at game speed — reinforcing anticipation, deception, and execution in a way
-                that directly transfers to games.
-              </p>
-            </div>
-
-            <div class="fh-card">
-              <img src="assets/images/forhockey/drill-2.png" alt="Drill example video" />
-              <div class="fh-card-meta">
-                <span class="fh-card-title">Scan • React • Shoot</span>
-                <span class="fh-card-sub">Coach K</span>
-              </div>
-            </div>
-
-            <button class="fh-nav" type="button" aria-label="Next">›</button>
+            <button class="fh-row-nav fh-row-next" type="button" aria-label="Next" data-scroll-target="#drillsRow">›</button>
           </div>
         </div>
       </section>
 
-      <!-- SECTION 2: HABITS -->
-      <section class="fh-section">
-        <div class="container fh-two-col">
-          <div class="fh-copy">
-            <div class="fh-badge">
-              <img src="assets/images/logo.png" alt="Think Then Play mark" />
+      <!-- SECTION: TRAIN ANYWHERE -->
+      <section class="fh-section fh-section-grey" id="dryland">
+        <div class="container">
+          <div class="fh-section-head">
+            <h2 class="fh-h2">Train Anywhere — Dryland, At Home,<br />or Right Before Game Time.</h2>
+          </div>
+        </div>
+
+        <!-- ✅ FULL-BLEED MINI ROW -->
+        <div class="fh-bleed">
+          <div class="fh-tile-row" aria-label="Train anywhere clips">
+            <button class="fh-row-nav fh-row-prev" type="button" aria-label="Previous" data-scroll-target="#miniRow">‹</button>
+
+            <div class="fh-scroller fh-mini-row" id="miniRow">
+              <article class="fh-mini-card">
+                <div class="fh-card-video">
+                  <video class="cf-video" playsinline muted loop preload="metadata"
+                    data-hls="https://customer-hev71calbt8qvapr.cloudflarestream.com/cfd2198df7d205910f7d1cfbff7f70d6/manifest/video.m3u8"></video>
+                </div>
+                <div class="fh-mini-meta">
+                  <div class="fh-mini-title">Hue Hustle Plank</div>
+                  <div class="fh-mini-sub">Coach K</div>
+                </div>
+              </article>
+
+              <article class="fh-mini-card">
+                <div class="fh-card-video">
+                  <video class="cf-video" playsinline muted loop preload="metadata"
+                    data-hls="https://customer-hev71calbt8qvapr.cloudflarestream.com/cfd2198df7d205910f7d1cfbff7f70d6/manifest/video.m3u8"></video>
+                </div>
+                <div class="fh-mini-meta">
+                  <div class="fh-mini-title">Light Foot Tap</div>
+                  <div class="fh-mini-sub">Coach K</div>
+                </div>
+              </article>
+
+              <article class="fh-mini-card">
+                <div class="fh-card-video">
+                  <video class="cf-video" playsinline muted loop preload="metadata"
+                    data-hls="https://customer-hev71calbt8qvapr.cloudflarestream.com/cfd2198df7d205910f7d1cfbff7f70d6/manifest/video.m3u8"></video>
+                </div>
+                <div class="fh-mini-meta">
+                  <div class="fh-mini-title">Colour Hop</div>
+                  <div class="fh-mini-sub">Coach K</div>
+                </div>
+              </article>
+
+              <article class="fh-mini-card">
+                <div class="fh-card-video">
+                  <video class="cf-video" playsinline muted loop preload="metadata"
+                    data-hls="https://customer-hev71calbt8qvapr.cloudflarestream.com/cfd2198df7d205910f7d1cfbff7f70d6/manifest/video.m3u8"></video>
+                </div>
+                <div class="fh-mini-meta">
+                  <div class="fh-mini-title">Colour Hop</div>
+                  <div class="fh-mini-sub">Coach K</div>
+                </div>
+              </article>
             </div>
 
-            <h2 class="fh-h2">New possibilities for training how players think</h2>
+            <button class="fh-row-nav fh-row-next" type="button" aria-label="Next" data-scroll-target="#miniRow">›</button>
+          </div>
+        </div>
+      </section>
+
+      <!-- SECTION: FOR COACHES -->
+      <section class="fh-section" id="for-coaches">
+        <div class="container">
+          <div class="fh-section-head">
+            <h2 class="fh-h2">
+              Add structured cognitive training to your sessions — built to help<br />
+              coaches and training businesses grow.
+            </h2>
+          </div>
+
+          <div class="fh-tile-row fh-tile-grid" aria-label="For coaches tiles">
+            <article class="fh-tile fh-tile-dark fh-tile-tall">
+              <div class="fh-tile-body">
+                <h3 class="fh-tile-title">Promote your business</h3>
+                <p class="fh-tile-text">
+                  Share your drills with us and we will promote your business in app.
+                </p>
+              </div>
+              <div class="fh-tile-media fh-tile-media-bottom">
+                <div class="fh-media-video">
+                  <video class="cf-video" playsinline muted loop preload="metadata"
+                    data-hls="https://customer-hev71calbt8qvapr.cloudflarestream.com/cfd2198df7d205910f7d1cfbff7f70d6/manifest/video.m3u8"></video>
+                </div>
+              </div>
+            </article>
+
+            <article class="fh-tile fh-tile-light fh-tile-tall">
+              <div class="fh-tile-body">
+                <h3 class="fh-tile-title">The Future of Hockey</h3>
+                <p class="fh-tile-text">
+                  Equip players with the decision-making speed and reaction readiness today’s game demands.
+                </p>
+                <button class="fh-pill-btn" type="button">Play Podcast</button>
+              </div>
+            </article>
+
+            <article class="fh-tile fh-tile-light fh-tile-tall">
+              <div class="fh-tile-body">
+                <h3 class="fh-tile-title">At Home Training</h3>
+                <p class="fh-tile-text">
+                  Train at home with your head up, scanning and reacting.
+                </p>
+              </div>
+              <div class="fh-tile-media fh-tile-media-bottom">
+                <div class="fh-media-video">
+                  <video class="cf-video" playsinline muted loop preload="metadata"
+                    data-hls="https://customer-hev71calbt8qvapr.cloudflarestream.com/cfd2198df7d205910f7d1cfbff7f70d6/manifest/video.m3u8"></video>
+                </div>
+              </div>
+            </article>
+          </div>
+        </div>
+      </section>
+
+      <!-- SECTION: HOW IT WORKS -->
+      <section class="fh-section fh-how" id="how-it-works">
+        <div class="container fh-how-inner">
+          <div class="fh-how-mark">
+            <img src="assets/images/logo.png" alt="Think Then Play" />
+          </div>
+
+          <div class="fh-how-copy">
+            <div class="fh-eyebrow">How it Works</div>
+            <h2 class="fh-h2">New Possibilities for Training<br />How Players Think</h2>
+
             <p class="fh-lead">
               Think Then Play helps players process cues faster (scan → decide → execute) while moving.
-              It’s built for the moments that actually decide plays.
+              It’s built for the moments that actually decide plays:
             </p>
 
-            <h3 class="fh-h3">Habits we train together</h3>
             <ul class="fh-list">
-              <li><strong>Shoulder checks / pre-scans</strong> → awareness before puck retrievals</li>
-              <li><strong>Reaction</strong> → focus under pressure</li>
+              <li><strong>Shoulder checks / pre-scans</strong> + awareness before puck retrievals</li>
+              <li><strong>Reaction</strong> + focus under pressure</li>
               <li><strong>Decision-making</strong> (options, deception, timing)</li>
               <li><strong>Scanning that translates</strong> into better puck support and defensive reads</li>
+              <li><strong>Overall heads up play</strong></li>
             </ul>
           </div>
-
-          <div class="fh-media">
-            <div class="fh-phone-angled">
-              <img src="assets/images/forhockey/phone-angled.png" alt="Phone preview" />
-            </div>
-          </div>
-        </div>
-      </section>
-
-      <!-- SECTION 3: TRAIN ANYWHERE -->
-      <section class="fh-section fh-section-grey">
-        <div class="container">
-          <div class="fh-section-head">
-            <h2 class="fh-h2">
-              Train anywhere — dryland, at home, or right before game time
-            </h2>
-          </div>
-
-          <div class="fh-mini-row" aria-label="Short training examples">
-            <button class="fh-nav" type="button" aria-label="Previous">‹</button>
-
-            <div class="fh-mini">
-              <img src="assets/images/forhockey/video-1.png" alt="Training clip 1" />
-              <div class="fh-mini-meta">
-                <span class="fh-mini-title">Hue Hustle Plank</span>
-                <span class="fh-mini-sub">Coach K</span>
-              </div>
-            </div>
-
-            <div class="fh-mini">
-              <img src="assets/images/forhockey/video-2.png" alt="Training clip 2" />
-              <div class="fh-mini-meta">
-                <span class="fh-mini-title">Light Foot Tap</span>
-                <span class="fh-mini-sub">Coach K</span>
-              </div>
-            </div>
-
-            <div class="fh-mini">
-              <img src="assets/images/forhockey/video-3.png" alt="Training clip 3" />
-              <div class="fh-mini-meta">
-                <span class="fh-mini-title">Colour Hop</span>
-                <span class="fh-mini-sub">Coach K</span>
-              </div>
-            </div>
-
-            <div class="fh-mini">
-              <img src="assets/images/forhockey/video-4.png" alt="Training clip 4" />
-              <div class="fh-mini-meta">
-                <span class="fh-mini-title">Colour Hop</span>
-                <span class="fh-mini-sub">Coach K</span>
-              </div>
-            </div>
-
-            <button class="fh-nav" type="button" aria-label="Next">›</button>
-          </div>
-        </div>
-      </section>
-
-      <!-- SECTION 4: PLACE ANYWHERE -->
-      <section class="fh-section">
-        <div class="container">
-          <h2 class="fh-h2 fh-place-title">
-            Place the app anywhere.<br />
-            Use the glass. Tape. Net. Bench. Chair.<br />
-            Coach. Start anywhere — on or off the ice.
-          </h2>
-        </div>
-
-        <div class="fh-place-row" aria-label="Placement examples">
-          <img src="assets/images/forhockey/place-1.png" alt="Phone on glass" />
-          <img src="assets/images/forhockey/place-2.png" alt="Phone on net" />
-          <img src="assets/images/forhockey/place-3.png" alt="Phone taped up" />
         </div>
       </section>
 
@@ -290,14 +446,80 @@
           <div class="footer-links">
             <a href="privacy.html" class="footer-link">Privacy Policy</a>
             <a href="terms-and-conditions.html" class="footer-link">Terms and Conditions</a>
-                    <a href="support.html" class="footer-link">Support</a>
+            <a href="support.html" class="footer-link">Support</a>
           </div>
           <div class="footer-copy">© <span id="year"></span> Kevin Hisko</div>
         </div>
       </footer>
     </main>
 
-    <!-- Use your existing behaviour file -->
+    <!-- Keep your existing behaviour file -->
     <script src="script.js"></script>
+
+    <!-- HLS.js for Chrome/Edge playback -->
+    <script src="https://cdn.jsdelivr.net/npm/hls.js@1.5.15"></script>
+
+    <!-- Row scroll buttons + Cloudflare Stream preview init -->
+    <script>
+      (function () {
+        const bySel = (s) => document.querySelector(s);
+
+        // Row buttons
+        document.querySelectorAll("[data-scroll-target]").forEach((btn) => {
+          btn.addEventListener("click", () => {
+            const target = bySel(btn.getAttribute("data-scroll-target"));
+            if (!target) return;
+
+            const dir = btn.classList.contains("fh-row-prev") ? -1 : 1;
+            const amount = Math.round(target.clientWidth * 0.85) * dir;
+            target.scrollBy({ left: amount, top: 0, behavior: "smooth" });
+          });
+        });
+
+        // Footer year
+        const yearEl = document.getElementById("year");
+        if (yearEl && !yearEl.textContent) yearEl.textContent = new Date().getFullYear();
+
+        // Video previews (Cloudflare Stream HLS)
+        const videos = document.querySelectorAll("video.cf-video[data-hls]");
+        videos.forEach((video) => {
+          const src = video.getAttribute("data-hls");
+          if (!src) return;
+
+          // Ensure autoplay works
+          video.muted = true;
+          video.loop = true;
+          video.playsInline = true;
+          video.setAttribute("playsinline", "");
+          video.setAttribute("muted", "");
+          video.setAttribute("preload", "metadata");
+
+          // Safari can do HLS natively
+          if (video.canPlayType("application/vnd.apple.mpegurl")) {
+            video.src = src;
+            video.addEventListener("loadedmetadata", () => {
+              video.play().catch(() => {});
+            });
+            return;
+          }
+
+          // Chrome/Edge/Firefox via hls.js
+          if (window.Hls && Hls.isSupported()) {
+            const hls = new Hls({
+              lowLatencyMode: true,
+              backBufferLength: 30
+            });
+            hls.loadSource(src);
+            hls.attachMedia(video);
+            hls.on(Hls.Events.MANIFEST_PARSED, function () {
+              video.play().catch(() => {});
+            });
+          } else {
+            // Fallback: try setting src anyway
+            video.src = src;
+          }
+        });
+      })();
+    </script>
   </body>
 </html>
