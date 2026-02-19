@@ -162,15 +162,17 @@ a{ color: inherit; text-decoration: none; }
 /* Mobile carousel behaviour */
 @media (max-width: 720px){
   .fh-subnav{
-    flex-wrap: nowrap;              /* ✅ stop wrapping into 2 lines */
-    overflow-x: auto;               /* ✅ horizontal scroll */
+    /* existing */
+    flex-wrap: nowrap;
+    overflow-x: auto;
     -webkit-overflow-scrolling: touch;
-    scroll-snap-type: x mandatory;  /* ✅ carousel-ish snap */
-    padding: 6px var(--gutter) 10px;
-    margin-left: calc(var(--gutter) * -1);   /* ✅ bleed to edges like your scrollers */
-    margin-right: calc(var(--gutter) * -1);
-    gap: 14px;
+    scroll-snap-type: x mandatory;
+
+    /* ✅ adjust left/right inset so first chip aligns with title */
+    padding-left: calc(var(--gutter) + 6px);
+    padding-right: var(--gutter);
   }
+}
 
   .fh-subnav::-webkit-scrollbar{ height: 0; }
 
