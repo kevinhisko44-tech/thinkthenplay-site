@@ -322,9 +322,9 @@ a{ color: inherit; text-decoration: none; }
 
 /* ✅ HERO TILE ROW: fixed 330 x 450 */
 .fh-hero-tiles .fh-tiles .fh-tile{
-  width: 330px;
-  min-width: 330px;
-  max-width: 330px;
+  width: 310px;
+  min-width: 310px;
+  max-width: 310px;
   height: 450px;
   border-radius: var(--radius2);
   overflow: hidden;
