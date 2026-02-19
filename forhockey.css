@@ -149,23 +149,46 @@ a{ color: inherit; text-decoration: none; }
   font-weight: 500;
   margin: 22px 0 14px;
 }
-
+/* --- Subnav: desktop stays wrapped, mobile becomes horizontal scroller --- */
 .fh-subnav{
   display: flex;
-  flex-wrap: wrap;
   gap: 25px;
   font-size: 14px;
   color: #3a3a3a;
   margin-bottom: 18px;
-    margin-top: 50px;
-}
-.fh-subnav a{
-  padding: 6px 0;
-}
-.fh-subnav a:hover{
-  color: #000;
+  margin-top: 50px;
 }
 
+/* Mobile carousel behaviour */
+@media (max-width: 720px){
+  .fh-subnav{
+    flex-wrap: nowrap;              /* ✅ stop wrapping into 2 lines */
+    overflow-x: auto;               /* ✅ horizontal scroll */
+    -webkit-overflow-scrolling: touch;
+    scroll-snap-type: x mandatory;  /* ✅ carousel-ish snap */
+    padding: 6px var(--gutter) 10px;
+    margin-left: calc(var(--gutter) * -1);   /* ✅ bleed to edges like your scrollers */
+    margin-right: calc(var(--gutter) * -1);
+    gap: 14px;
+  }
+
+  .fh-subnav::-webkit-scrollbar{ height: 0; }
+
+  .fh-subnav a{
+    flex: 0 0 auto;                 /* ✅ keep items on one line */
+    scroll-snap-align: start;
+    white-space: nowrap;            /* ✅ prevent “At Home Drills” wrapping */
+    padding: 10px 12px;             /* ✅ chip feel */
+    border-radius: 999px;
+    border: 1px solid rgba(0,0,0,.10);
+    background: rgba(255,255,255,.85);
+    backdrop-filter: blur(10px);
+  }
+
+  .fh-subnav a:active{
+    transform: translateY(1px);
+  }
+}
 /* ---- Video embed helpers (for non-hero rows) ---- */
 .fh-card-video,
 .fh-media-video{
@@ -203,7 +226,7 @@ a{ color: inherit; text-decoration: none; }
 .fh-scroller{
   /* your existing scroller styles */
   display: flex;
-  gap: 28px;
+  gap: 15px;
   overflow-x: auto;
   scroll-snap-type: x mandatory;
   -webkit-overflow-scrolling: touch;
