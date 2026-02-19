@@ -11,7 +11,6 @@
   --radius: 22px;
   --radius2: 28px;
   --container: 1100px;
-
   /* ✅ keep container padding in one place (used to align scrollers) */
   --gutter: 22px;
 }
@@ -141,6 +140,7 @@ a{ color: inherit; text-decoration: none; }
 .fh-hero{
   padding: 22px 0 0;
 }
+
 .fh-title{
    font-size: clamp(22px, 3vw, 34px);
   letter-spacing: -0.02em;
@@ -186,39 +186,38 @@ a{ color: inherit; text-decoration: none; }
 }
 
 
-/* ✅ FULL-BLEED WRAPPER (Apple-style) */
 .fh-bleed{
-  width: 100vw;
-  margin-left: calc(50% - 50vw);
+  position: relative;
+  overflow: visible;
+  
 }
 
-/* -------- Apple-style scrollers -------- */
 .fh-tile-row{
   position: relative;
-  margin: 60px 0 60px;
+  overflow: visible;
+  margin: 60px 0;
 }
 
-/* ✅ Core fix: the scroller must have the SAME left gutter as .container
-   so the FIRST tile aligns with the hero title + subnav.
-   After scrolling, alignment no longer matters (Apple behaviour). */
 .fh-scroller{
   display: flex;
-  gap: 28px; /* Apple-like spacing */
+  gap: 28px;
   overflow-x: auto;
+  overflow-y: visible;
   scroll-snap-type: x mandatory;
   -webkit-overflow-scrolling: touch;
+  
 
-  /* ✅ Align to container content edge */
-  padding-left: max(var(--gutter), calc((100vw - var(--container)) / 2 + var(--gutter)));
-  padding-right: var(--gutter);
-
+  /* align first tile with container content edge */
+  padding-left: max(22px, calc((100vw - var(--container)) / 2 + 22px));
+  padding-right: 22px;
   padding-top: 6px;
   padding-bottom: 16px;
 }
-.fh-scroller::-webkit-scrollbar{ height: 0; }
 
-/* ✅ Optional but helps: make sure the first tile doesn't introduce extra margin */
+.fh-scroller::-webkit-scrollbar{ height: 0; }
 .fh-scroller > *{ scroll-snap-align: start; }
+
+
 
 /* Nav buttons */
 .fh-row-nav{
