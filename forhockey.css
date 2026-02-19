@@ -35,6 +35,8 @@ a{ color: inherit; text-decoration: none; }
   padding: 0 var(--gutter);
 }
 
+
+
 /* ---------- Top bar ---------- */
 .topbar {
   position: sticky;
@@ -199,23 +201,27 @@ a{ color: inherit; text-decoration: none; }
 }
 
 .fh-scroller{
+  /* your existing scroller styles */
   display: flex;
-  gap: 12px;
+  gap: 28px;
   overflow-x: auto;
-  overflow-y: visible;
   scroll-snap-type: x mandatory;
   -webkit-overflow-scrolling: touch;
-  
-
-  /* align first tile with container content edge */
-  padding-left: max(22px, calc((100vw - var(--container)) / 2 + 22px));
-  padding-right: 22px;
   padding-top: 6px;
   padding-bottom: 16px;
+
+  /* ✅ right-bleed while aligning left with container */
+  width: calc(100vw - max(22px, (100vw - var(--container)) / 2));
+  margin-right: 0;
+
+  /* optional: keep a little breathing room at the end */
+  padding-right: 22px;
 }
 
 .fh-scroller::-webkit-scrollbar{ height: 0; }
 .fh-scroller > *{ scroll-snap-align: start; }
+
+
 
 
 
