@@ -185,6 +185,7 @@ a{ color: inherit; text-decoration: none; }
   overflow: hidden;
 }
 
+
 /* ✅ FULL-BLEED WRAPPER (Apple-style) */
 .fh-bleed{
   width: 100vw;
@@ -288,6 +289,8 @@ a{ color: inherit; text-decoration: none; }
   color: rgba(17,17,17,.78);
 }
 .fh-tile-dark .fh-tile-text{ color: rgba(255,255,255,.78); }
+
+.fh-tile-custom {  background: #DBD7D3; /* your colour */}
 
 .fh-tile-media{
   padding: 0 18px 18px;
