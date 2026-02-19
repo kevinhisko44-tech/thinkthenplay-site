@@ -272,7 +272,7 @@ a{ color: inherit; text-decoration: none; }
   border-color: rgba(255,255,255,.10);
 }
 .fh-tile-body{
-  padding: 18px 18px 52px;
+  padding: 18px 18px 12px;
 }
 .fh-tile-title{
   margin: 0 0 8px;
