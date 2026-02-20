@@ -181,7 +181,7 @@
                   <p class="fh-tile-text">Add cognitive challenges to your workouts so athletes think while they move.</p>
                 </div>
                 <div class="fh-tile-media fh-tile-media-bottom">
-                  <img src="assets/images/forhockey/tile-4.png" alt="At home training tile" />
+                  <img src="assets/images/forhockey/dryland-tile.png" alt="At home training tile" />
                 </div>
               </article>
 
@@ -457,9 +457,9 @@
           </article>
 
           <!-- Tile 2 -->
-          <article class="fh-tile fh-tile-light">
+          <article class="fh-tile fh-tile-dark">
             <div class="fh-tile-body">
-              <div class="fh-tile-eyebrow">Training Businesses</div>
+              <div class="fh-tile-eyebrow">For Training Businesses</div>
               <p class="fh-tile-text">
              Grow Your Revenue with Cognitive Training. Offer structured scanning, reaction, and visual decision-making sessions that help athletes perform — and help your business scale. </p>
             </div>
@@ -584,12 +584,13 @@
     </script>
 
    <script>
-  (function () {
-    const bySel = (s) => document.querySelector(s);
+(function () {
+  const bySel = (s) => document.querySelector(s);
 
-    // -------------------------------
-    // Row buttons (keep as-is)
-    // -------------------------------
+  // -------------------------------
+  // Row buttons (keep as-is)
+  // -------------------------------
+  function bindRowButtons() {
     document.querySelectorAll("[data-scroll-target]").forEach((btn) => {
       btn.addEventListener("click", () => {
         const target = bySel(btn.getAttribute("data-scroll-target"));
@@ -600,23 +601,50 @@
         target.scrollBy({ left: amount, top: 0, behavior: "smooth" });
       });
     });
+  }
 
-    // Footer year (keep as-is)
+  // Footer year (keep as-is)
+  function setFooterYear() {
     const yearEl = document.getElementById("year");
     if (yearEl && !yearEl.textContent) yearEl.textContent = new Date().getFullYear();
+  }
 
-    // -------------------------------
-    // Video previews
-    //  - Mobile: autoplay when in-view (scroll)
-    //  - Desktop: autoplay on hover (mouseenter)
-    // -------------------------------
+  // -------------------------------
+  // Video system
+  // -------------------------------
+  const supportsHover = window.matchMedia("(hover: hover) and (pointer: fine)").matches;
+
+  const pauseSafe = (v) => { try { v.pause(); } catch(e) {} };
+  const playSafe = (v) => { try { return v.play(); } catch(e) { return Promise.reject(e); } };
+
+  function pauseAllExcept(videos, keep) {
+    videos.forEach(v => { if (v !== keep) pauseSafe(v); });
+  }
+
+  function ensureHlsJsReady(cb) {
+    // iOS Safari: native HLS, doesn’t need Hls.js
+    // Android/desktop Chrome: needs Hls.js for .m3u8
+    if (window.Hls) return cb();
+
+    // If the page already includes the script but it hasn't executed yet, wait a tick.
+    setTimeout(() => {
+      if (window.Hls) return cb();
+
+      // Last resort: dynamically load Hls.js (safe + reliable)
+      const s = document.createElement("script");
+      s.src = "https://cdn.jsdelivr.net/npm/hls.js@1.5.15";
+      s.async = true;
+      s.onload = () => cb();
+      s.onerror = () => cb(); // still continue (native HLS may work)
+      document.head.appendChild(s);
+    }, 0);
+  }
+
+  function setupVideos() {
     const videos = Array.from(document.querySelectorAll("video.cf-video[data-hls]"));
     if (!videos.length) return;
 
-    // Detect real desktop hover (prevents weird behaviour on touch devices)
-    const supportsHover = window.matchMedia("(hover: hover) and (pointer: fine)").matches;
-
-    // 1) Setup each video (NO immediate play)
+    // 1) Attach sources/HLS ONCE (no immediate play)
     videos.forEach((video) => {
       const src = video.getAttribute("data-hls");
       if (!src) return;
@@ -629,53 +657,47 @@
       video.setAttribute("muted", "");
       video.preload = "metadata";
 
-      // Attach source/HLS once
+      // Safari (iOS/macOS) native HLS
       if (video.canPlayType("application/vnd.apple.mpegurl")) {
-        // Safari native HLS
         video.src = src;
         return;
       }
 
-      // Chrome/Edge/Firefox via hls.js
+      // Other browsers: Hls.js if available/supported
       if (window.Hls && Hls.isSupported()) {
+        // Avoid double-attaching if you hot reload scripts
+        if (video._hlsAttached) return;
+
         const hls = new Hls({
           lowLatencyMode: true,
           backBufferLength: 30
         });
         hls.loadSource(src);
         hls.attachMedia(video);
-        video._hls = hls; // keep reference
+        video._hls = hls;
+        video._hlsAttached = true;
       } else {
-        // Fallback
+        // Fallback: set src (may not work on Chrome for .m3u8, but harmless)
         video.src = src;
       }
     });
 
-    // Helpers
-    const pauseAllExcept = (keep) => {
-      videos.forEach((v) => {
-        if (v !== keep) {
-          try { v.pause(); } catch (e) {}
-        }
-      });
-    };
-
     const playIfReady = (video) => {
-      pauseAllExcept(video);
+      pauseAllExcept(videos, video);
 
+      // Ensure it’s muted (mobile autoplay requirement)
+      video.muted = true;
+
+      // Attempt play; if metadata not ready, wait
       if (video.readyState >= 2) {
-        video.play().catch(() => {});
+        playSafe(video).catch(() => {});
       } else {
         const onReady = () => {
           video.removeEventListener("loadedmetadata", onReady);
-          video.play().catch(() => {});
+          playSafe(video).catch(() => {});
         };
         video.addEventListener("loadedmetadata", onReady);
       }
-    };
-
-    const pauseVideo = (video) => {
-      try { video.pause(); } catch (e) {}
     };
 
     // -------------------------------
@@ -687,90 +709,125 @@
       videos.forEach((video) => {
         const card =
           video.closest(".fh-video-card") ||
-          video.closest(".fh-mini-card") ||
           video.closest(".fh-media-video") ||
           video.parentElement;
 
         if (!card) return;
 
         card.addEventListener("mouseenter", () => {
-          // tiny delay prevents flicker if user just passes over
           clearTimeout(hoverTimer);
           hoverTimer = setTimeout(() => playIfReady(video), 80);
         });
 
         card.addEventListener("mouseleave", () => {
           clearTimeout(hoverTimer);
-          pauseVideo(video);
-
-          // Optional: reset to start for "preview" feel.
-          // Comment this out if you want it to resume where it left off.
+          pauseSafe(video);
           try { video.currentTime = 0; } catch (e) {}
         });
       });
+
+      return; // desktop done
     }
 
     // -------------------------------
-    // B) Mobile / no-hover devices: play when in view (carousel scroll)
+    // B) Mobile / no-hover: play video closest to scroller centre on scroll
+    // (This is the reliable iOS fix)
     // -------------------------------
-    if (!supportsHover) {
-      // One observer per scroller so horizontal swipe triggers reliably
-      const makeObserverFor = (scroller) => {
-        return new IntersectionObserver(
-          (entries) => {
-            // Pick the most visible video in this scroller and play only that
-            let best = null;
-            entries.forEach((entry) => {
-              if (!entry.isIntersecting) return;
-              if (!best || entry.intersectionRatio > best.intersectionRatio) best = entry;
-            });
+    const scrollers = Array.from(new Set(
+      videos.map(v => v.closest(".fh-scroller")).filter(Boolean)
+    ));
 
-            entries.forEach((entry) => {
-              const v = entry.target;
-              if (best && entry.target === best.target && best.intersectionRatio >= 0.6) {
-                playIfReady(v);
-              } else {
-                pauseVideo(v);
-              }
-            });
-          },
-          {
-            root: scroller,
-            threshold: [0, 0.25, 0.6, 0.85]
-          }
-        );
-      };
+    const rafMap = new Map();
 
-      const scrollers = Array.from(
-        new Set(videos.map((v) => v.closest(".fh-scroller")).filter(Boolean))
-      );
+    const pickAndPlayBestInScroller = (scroller) => {
+      const rect = scroller.getBoundingClientRect();
+      const centreX = rect.left + rect.width / 2;
 
-      const observers = new Map();
-      scrollers.forEach((scroller) => observers.set(scroller, makeObserverFor(scroller)));
+      const scrollerVideos = videos.filter(v => v.closest(".fh-scroller") === scroller);
+      if (!scrollerVideos.length) return;
 
-      videos.forEach((video) => {
-        const scroller = video.closest(".fh-scroller");
-        const obs = observers.get(scroller);
-        if (obs) obs.observe(video);
+      let best = null;
+
+      scrollerVideos.forEach((v) => {
+        const card = v.closest(".fh-video-card, .fh-mini-card, article") || v;
+        const r = card.getBoundingClientRect();
+
+        // How much of the card is actually visible horizontally inside scroller viewport
+        const visibleLeft = Math.max(r.left, rect.left);
+        const visibleRight = Math.min(r.right, rect.right);
+        const visibleW = Math.max(0, visibleRight - visibleLeft);
+        const ratio = visibleW / Math.max(1, r.width);
+
+        // Distance from centre
+        const cardCentreX = r.left + r.width / 2;
+        const dist = Math.abs(cardCentreX - centreX);
+
+        // Require meaningful visibility
+        if (ratio < 0.6) return;
+
+        if (!best || dist < best.dist) {
+          best = { v, dist };
+        }
       });
 
-      // Optional: tap to force play on mobile
-      document
-        .querySelectorAll(".fh-video-card, .fh-mini-card, .fh-media-video")
-        .forEach((card) => {
-          card.addEventListener(
-            "pointerdown",
-            () => {
-              const v = card.querySelector("video");
-              if (!v) return;
-              playIfReady(v);
-            },
-            { passive: true }
-          );
-        });
-    }
-  })();
+      if (best && best.v) {
+        playIfReady(best.v);
+      } else {
+        // If nothing is >=60% visible, pause all in this scroller
+        scrollerVideos.forEach(pauseSafe);
+      }
+    };
+
+    const schedulePick = (scroller) => {
+      if (rafMap.get(scroller)) return;
+      rafMap.set(scroller, requestAnimationFrame(() => {
+        rafMap.delete(scroller);
+        pickAndPlayBestInScroller(scroller);
+      }));
+    };
+
+    scrollers.forEach((scroller) => {
+      // initial pick
+      schedulePick(scroller);
+
+      // react to swipe/scroll
+      scroller.addEventListener("scroll", () => schedulePick(scroller), { passive: true });
+
+      // react to orientation changes / resize
+      window.addEventListener("resize", () => schedulePick(scroller), { passive: true });
+      window.addEventListener("orientationchange", () => schedulePick(scroller), { passive: true });
+    });
+
+    // Mobile fallback: tap to play (also counts as user gesture)
+    document.querySelectorAll(".fh-video-card, .fh-mini-card, .fh-media-video").forEach((card) => {
+      card.addEventListener("pointerdown", () => {
+        const v = card.querySelector("video");
+        if (v) playIfReady(v);
+      }, { passive: true });
+    });
+  }
+
+  // -------------------------------
+  // Boot
+  // -------------------------------
+  function init() {
+    bindRowButtons();
+    setFooterYear();
+
+    ensureHlsJsReady(() => {
+      setupVideos();
+    });
+  }
+
+  // Run after DOM is ready (more reliable on mobile)
+  if (document.readyState === "loading") {
+    document.addEventListener("DOMContentLoaded", init);
+  } else {
+    init();
+  }
+})();
 </script>
+
 
     
   </body>
