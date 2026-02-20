@@ -318,9 +318,9 @@ a{ color: inherit; text-decoration: none; }
   line-height: 1.35;
   color: rgba(17,17,17,.78);
 }
-.fh-tile-dark .fh-tile-text{ color: rgb(255, 255, 255); }
+.fh-tile-dark .fh-tile-text{ color: rgba(255, 255, 255, 0.78); }
 
-.fh-tile-custom {  background: #DBD7D3; /* your colour */}
+.fh-tile-custom {  background: #FDF7FB; /* your colour */}
 
 .fh-tile-media{
   padding: 0 18px 18px;
@@ -349,6 +349,170 @@ a{ color: inherit; text-decoration: none; }
   place-items: center;
   font-size: 18px;
   
+}
+
+
+/* --- Tile CTA row (white bar at bottom) --- */
+/* ---- FORCE CTA TO BOTTOM (works even if media is absolutely positioned) ---- */
+
+.fh-tile.fh-tile-custom {
+  position: relative;
+  overflow: hidden;          /* keeps rounded corners clean */
+  padding-bottom: 56px;      /* reserve space for the CTA row (adjust if needed) */
+}
+
+/* Make sure the button spans the tile and sits at the bottom */
+.fh-tile.fh-tile-custom .fh-tile-cta {
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  background: #fff;
+  border: 0;
+  border-top: 1px solid rgba(0,0,0,0.08);
+  padding: 14px 16px;
+  cursor: pointer;
+  z-index: 5;
+}
+
+/* Keep content readable if anything else is positioned */
+.fh-tile.fh-tile-custom .fh-tile-body,
+.fh-tile.fh-tile-custom .fh-tile-media {
+  position: relative;
+  z-index: 1;
+}
+
+/* CTA inner layout */
+.fh-tile-cta-left {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  min-width: 0;
+}
+
+.fh-tile-cta-text {
+  font-weight: 700;
+  color: #111;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.fh-tile-cta-right {
+  font-weight: 700;
+  color: #111;
+  opacity: 0.9;
+  flex-shrink: 0;
+}
+
+.fh-play-icon {
+  width: 0;
+  height: 0;
+  border-left: 10px solid #111;
+  border-top: 7px solid transparent;
+  border-bottom: 7px solid transparent;
+  flex-shrink: 0;
+}
+/* --- Modal container --- */
+.fh-video-modal {
+  position: fixed;
+  inset: 0;
+  display: none;              /* hidden until open */
+  z-index: 9999;
+}
+
+.fh-video-modal.is-open {
+  display: block;
+}
+
+.fh-video-modal-backdrop {
+  position: absolute;
+  inset: 0;
+  background: rgba(0,0,0,0.65);
+}
+
+/* --- Panel sizing (smaller) --- */
+.fh-video-modal-panel {
+  position: relative;
+  margin: 0 auto;
+  top: 50%;
+  transform: translateY(-50%);
+
+  width: min(820px, calc(100vw - 32px));  /* ✅ smaller max width */
+  max-height: min(78vh, 620px);           /* ✅ don’t take over screen */
+  background: #111;
+  border-radius: 18px;
+  overflow: hidden;
+  box-shadow: 0 20px 60px rgba(0,0,0,0.45);
+}
+
+/* Close button */
+.fh-video-modal-close {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  z-index: 3;
+  width: 38px;
+  height: 38px;
+  border: 0;
+  border-radius: 999px;
+  background: rgba(255,255,255,0.12);
+  color: #fff;
+  font-size: 18px;
+  cursor: pointer;
+}
+
+/* Player wrapper */
+.fh-video-modal-player {
+  position: relative;
+  width: 100%;
+  height: 100%;
+}
+
+/* ✅ Video: fit inside the panel without giant height */
+#fhModalVideo {
+  width: 100%;
+  height: auto;
+  display: block;
+  background: #000;
+  max-height: min(70vh, 540px);
+}
+
+/* ✅ Mute button overlay */
+.fh-audio-toggle {
+  position: absolute;
+  left: 12px;
+  bottom: 12px;
+  z-index: 3;
+
+  border: 0;
+  border-radius: 999px;
+  padding: 10px 12px;
+  background: rgba(0,0,0,0.55);
+  color: #fff;
+  font-weight: 600;
+  cursor: pointer;
+  backdrop-filter: blur(6px);
+}
+
+/* Mobile: a bit smaller */
+@media (max-width: 520px) {
+  .fh-video-modal-panel {
+    width: calc(100vw - 20px);
+    max-height: 76vh;
+    border-radius: 16px;
+  }
+
+  .fh-audio-toggle {
+    padding: 9px 11px;
+    font-size: 14px;
+  }
 }
 
 /* ✅ HERO TILE ROW: fixed 330 x 450 */
@@ -630,6 +794,55 @@ font-weight: 500;
   color: #333;
   line-height: 1.45;
   font-size: 13.5px;
+}
+
+/* --- CTA row (white bar at bottom) --- */
+.fh-tile.fh-tile-custom{
+  position: relative;
+  overflow: hidden;
+  padding-bottom: 58px; /* reserve space for the row */
+}
+
+.fh-tile.fh-tile-custom .fh-tile-cta-row{
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+
+  width: 100%;
+  height: 58px;               /* makes it consistent */
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  background: #fff;
+  border: 0;
+  border-top: 1px solid rgba(0,0,0,0.10);
+  padding: 0 16px;
+  cursor: pointer;
+  z-index: 10;
+}
+
+.fh-tile-cta-row .fh-tile-cta-left{
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  min-width: 0;
+}
+
+.fh-tile-cta-row .fh-tile-cta-text{
+  font-weight: 700;
+  color: #111;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.fh-tile-cta-row .fh-tile-cta-right{
+  font-weight: 700;
+  color: #111;
+  opacity: 0.9;
+  flex-shrink: 0;
 }
 
 /* -------- Footer -------- */

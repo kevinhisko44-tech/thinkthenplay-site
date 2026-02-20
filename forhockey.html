@@ -139,6 +139,32 @@
                 </div>
               </article>
 
+<!-- Tile -->
+<article class="fh-tile fh-tile-light fh-tile-custom">
+  <div class="fh-tile-body">
+    <h3 class="fh-tile-title">At Home Training</h3>
+    <p class="fh-tile-text">Train at home with your head up, scanning and reacting.</p>
+  </div>
+
+  <div class="fh-tile-media fh-tile-media-bottom">
+    <img src="assets/images/forhockey/tile-4.png" alt="At home training tile" />
+  </div>
+
+  <!-- ✅ White CTA row at bottom (clickable) -->
+  <button
+    class="fh-tile-cta-row"
+    type="button"
+    data-open-video
+    data-hls="https://customer-hev71calbt8qvapr.cloudflarestream.com/bcb10ba888d0a01c28900429ad02cfbe/manifest/video.m3u8"
+    aria-label="Play McDavid head-up training video"
+  >
+    <span class="fh-tile-cta-left">
+      <span class="fh-play-icon" aria-hidden="true"></span>
+      <span class="fh-tile-cta-text">Watch Mcdavid at 13 training</span>
+    </span>
+  </button>
+</article>
+
                <!-- Tile 5 (dark) -->
               <article class="fh-tile fh-tile-dark">
                 <div class="fh-tile-body">
@@ -151,15 +177,8 @@
               </article>
 
                <!-- Tile 4 -->
-              <article class="fh-tile fh-tile-light fh-tile-custom">
-                <div class="fh-tile-body">
-                  <h3 class="fh-tile-title">At Home Training</h3>
-                  <p class="fh-tile-text">Train at home with your head up, scanning and reacting.</p>
-                </div>
-                <div class="fh-tile-media fh-tile-media-bottom">
-                  <img src="assets/images/forhockey/tile-4.png" alt="At home training tile" />
-                </div>
-              </article>
+
+
 
               <!-- Tile 2 (dark) -->
               <article class="fh-tile fh-tile-dark">
@@ -199,7 +218,15 @@
                 </div>
               </article>
              
-
+   <article class="fh-tile fh-tile-light">
+                <div class="fh-tile-body">
+                  <h3 class="fh-tile-title">Pre-Game Warmup</h3>
+                  <p class="fh-tile-text">Getting ready isn’t just about movement. Add cognitive reps to sharpen focus, scanning, and decision-making before puck drop.</p>
+                </div>
+                <div class="fh-tile-media fh-tile-media-bottom">
+                  <img src="assets/images/forhockey/warmup-tile.png" alt="At home training tile" />
+                </div>
+              </article>
              
 
              
@@ -313,6 +340,12 @@
 
         <div class="fh-scroller fh-video-row" id="homeRow" data-autoplay="inview">
          
+               <article class="fh-video-card">
+            <div class="fh-card-video">
+              <video class="cf-video" playsinline muted loop preload="metadata"
+                data-hls="https://customer-hev71calbt8qvapr.cloudflarestream.com/d5950205231b0f8dc7617365c60afbb9/manifest/video.m3u8"></video>
+            </div>
+          </article>
          
                     <article class="fh-video-card">
             <div class="fh-card-video">
@@ -552,39 +585,38 @@
       </footer>
     </main>
 
+
+<!-- ✅ Video Modal (MOVE THIS ABOVE THE SCRIPTS) -->
+<div class="fh-video-modal" id="fhVideoModal" aria-hidden="true">
+  <div class="fh-video-modal-backdrop" data-close-video></div>
+
+  <div class="fh-video-modal-panel" role="dialog" aria-modal="true" aria-label="Video player">
+    <button class="fh-video-modal-close" type="button" data-close-video aria-label="Close video">✕</button>
+
+    <div class="fh-video-modal-player">
+      <video
+        id="fhModalVideo"
+        playsinline
+        webkit-playsinline
+        controls
+        preload="metadata"
+      ></video>
+
+      <button class="fh-audio-toggle" id="fhAudioToggle" type="button" aria-label="Toggle audio">
+        Audio: Off
+      </button>
+    </div>
+  </div>
+</div>
+
     <!-- Keep your existing behaviour file -->
     <script src="script.js"></script>
 
     <!-- HLS.js for Chrome/Edge playback -->
     <script src="https://cdn.jsdelivr.net/npm/hls.js@1.5.15"></script>
 
-    <!-- Row scroll buttons + Cloudflare Stream preview init -->
-    <script>
-      (function () {
-        const bySel = (s) => document.querySelector(s);
-
-        // Row buttons
-        document.querySelectorAll("[data-scroll-target]").forEach((btn) => {
-          btn.addEventListener("click", () => {
-            const target = bySel(btn.getAttribute("data-scroll-target"));
-            if (!target) return;
-
-            const dir = btn.classList.contains("fh-row-prev") ? -1 : 1;
-            const amount = Math.round(target.clientWidth * 0.85) * dir;
-            target.scrollBy({ left: amount, top: 0, behavior: "smooth" });
-          });
-        });
-
-        // Footer year
-        const yearEl = document.getElementById("year");
-        if (yearEl && !yearEl.textContent) yearEl.textContent = new Date().getFullYear();
-
-        
-      })();
-    </script>
-
-<script>
-(function () {
+   <script>
+document.addEventListener("DOMContentLoaded", () => {
   const bySel = (s) => document.querySelector(s);
 
   // -------------------------------
@@ -606,12 +638,123 @@
   if (yearEl && !yearEl.textContent) yearEl.textContent = new Date().getFullYear();
 
   // -------------------------------
-  // Video previews (Cloudflare Stream HLS)
+  // Modal player (with audio toggle)
   // -------------------------------
-  const videos = Array.from(document.querySelectorAll("video.cf-video[data-hls]"));
-  if (!videos.length) return;
+  const modal = document.getElementById("fhVideoModal");
+  const modalVideo = document.getElementById("fhModalVideo");
+  const audioBtn = document.getElementById("fhAudioToggle");
 
+  let activeHls = null;
+
+  const openModal = () => {
+    modal.classList.add("is-open");
+    modal.setAttribute("aria-hidden", "false");
+    document.body.style.overflow = "hidden";
+  };
+
+  const closeModal = () => {
+    try { modalVideo.pause(); } catch(e) {}
+    try { modalVideo.currentTime = 0; } catch(e) {}
+
+    if (activeHls) {
+      try { activeHls.destroy(); } catch(e) {}
+      activeHls = null;
+    }
+
+    modalVideo.removeAttribute("src");
+    try { modalVideo.load(); } catch(e) {}
+
+    modal.classList.remove("is-open");
+    modal.setAttribute("aria-hidden", "true");
+    document.body.style.overflow = "";
+  };
+
+  const setAudioUI = () => {
+    if (!audioBtn) return;
+    audioBtn.textContent = modalVideo.muted ? "Audio: Off" : "Audio: On";
+  };
+
+  const loadModalVideo = (src) => {
+    if (!src) return;
+
+    // Pause any inline preview videos behind
+    document.querySelectorAll("video.cf-video").forEach(v => { try { v.pause(); } catch(e) {} });
+
+    // Reset previous HLS instance
+    if (activeHls) {
+      try { activeHls.destroy(); } catch(e) {}
+      activeHls = null;
+    }
+
+    // Start muted, user can unmute
+    modalVideo.muted = false;
+    setAudioUI();
+
+    // Native HLS (iOS Safari/Chrome)
+    if (modalVideo.canPlayType("application/vnd.apple.mpegurl")) {
+      modalVideo.src = src;
+      try { modalVideo.load(); } catch(e) {}
+      openModal();
+
+      // Must be called directly from the click handler chain
+      const p = modalVideo.play();
+      if (p && p.catch) p.catch(() => {});
+      return;
+    }
+
+    // Hls.js for other browsers
+    if (window.Hls && Hls.isSupported()) {
+      activeHls = new Hls({ lowLatencyMode: true, backBufferLength: 30 });
+      activeHls.loadSource(src);
+      activeHls.attachMedia(modalVideo);
+
+      openModal();
+
+      activeHls.on(Hls.Events.MANIFEST_PARSED, () => {
+        const p = modalVideo.play();
+        if (p && p.catch) p.catch(() => {});
+      });
+    } else {
+      modalVideo.src = src;
+      try { modalVideo.load(); } catch(e) {}
+      openModal();
+      const p = modalVideo.play();
+      if (p && p.catch) p.catch(() => {});
+    }
+  };
+
+  // Bind modal open buttons (your tile CTA)
+  document.querySelectorAll("[data-open-video][data-hls]").forEach((btn) => {
+    btn.addEventListener("click", (e) => {
+      e.preventDefault();
+      e.stopPropagation();
+      loadModalVideo(btn.getAttribute("data-hls"));
+    });
+  });
+
+  // Close modal
+  modal.querySelectorAll("[data-close-video]").forEach((el) => {
+    el.addEventListener("click", closeModal);
+  });
+
+  document.addEventListener("keydown", (e) => {
+    if (e.key === "Escape" && modal.classList.contains("is-open")) closeModal();
+  });
+
+  if (audioBtn) {
+    audioBtn.addEventListener("click", () => {
+      modalVideo.muted = !modalVideo.muted;
+      setAudioUI();
+    });
+  }
+
+  // -------------------------------
+  // Inline previews (IMPORTANT iPhone behaviour)
+  //  - Desktop: hover plays muted previews
+  //  - Mobile: DO NOT try autoplay; tap plays muted inline
+  // -------------------------------
   const supportsHover = window.matchMedia("(hover: hover) and (pointer: fine)").matches;
+  const videos = Array.from(document.querySelectorAll("video.cf-video[data-hls]"));
 
   const pauseSafe = (v) => { try { v.pause(); } catch(e) {} };
   const playSafe  = (v) => { try { return v.play(); } catch(e) { return Promise.reject(e); } };
@@ -624,26 +767,24 @@
     const src = video.getAttribute("data-hls");
     if (!src) return;
 
-    // Always set autoplay-safe defaults
     video.muted = true;
     video.loop = true;
     video.playsInline = true;
     video.setAttribute("playsinline", "");
+    video.setAttribute("webkit-playsinline", "");
     video.setAttribute("muted", "");
     video.preload = "metadata";
 
-    // iOS Safari & iOS Chrome (both use WebKit): native HLS
-    const canNativeHls = video.canPlayType("application/vnd.apple.mpegurl");
-    if (canNativeHls) {
+    // Native HLS
+    if (video.canPlayType("application/vnd.apple.mpegurl")) {
       if (video.src !== src) {
         video.src = src;
-        // ✅ IMPORTANT on iOS: call load() after setting src
         try { video.load(); } catch(e) {}
       }
       return;
     }
 
-    // Non-iOS browsers: use hls.js
+    // hls.js
     if (window.Hls && Hls.isSupported()) {
       if (video._hlsAttached) return;
       const hls = new Hls({ lowLatencyMode: true, backBufferLength: 30 });
@@ -652,31 +793,20 @@
       video._hls = hls;
       video._hlsAttached = true;
     } else {
-      // Fallback
       video.src = src;
       try { video.load(); } catch(e) {}
     }
   };
 
-  // Attach sources immediately
   videos.forEach(attachSource);
 
-  const playVideo = (video) => {
+  const playPreview = (video) => {
     pauseAllExcept(video);
     video.muted = true;
-
-    // Ensure source is attached (safety)
     attachSource(video);
-
-    // Try to play
-    playSafe(video).catch(() => {
-      // If iOS blocks it without gesture, it'll still fail here
-    });
+    playSafe(video).catch(() => {});
   };
 
-  // -------------------------------
-  // Desktop: hover to play
-  // -------------------------------
   if (supportsHover) {
     let hoverTimer = null;
 
@@ -686,7 +816,7 @@
 
       card.addEventListener("mouseenter", () => {
         clearTimeout(hoverTimer);
-        hoverTimer = setTimeout(() => playVideo(video), 80);
+        hoverTimer = setTimeout(() => playPreview(video), 80);
       });
 
       card.addEventListener("mouseleave", () => {
@@ -695,20 +825,19 @@
         try { video.currentTime = 0; } catch(e) {}
       });
     });
+  } else {
+    // iPhone: use pointerup/touchend (stronger "gesture" signal than click)
+    document.querySelectorAll(".fh-video-card").forEach((card) => {
+      const handler = (e) => {
+        const v = card.querySelector("video.cf-video");
+        if (!v) return;
+        playPreview(v);
+      };
+      card.addEventListener("pointerup", handler);
+      card.addEventListener("touchend", handler, { passive: true });
+    });
   }
-
-  // -------------------------------
-  // Mobile: tap to play (required on iPhone)
-  // -------------------------------
-  document.querySelectorAll(".fh-video-card").forEach((card) => {
-    card.addEventListener("click", () => {
-      const v = card.querySelector("video.cf-video");
-      if (!v) return;
-      playVideo(v);
-    }, { passive: true });
-  });
-
-})();
+});
 </script>
 
 
