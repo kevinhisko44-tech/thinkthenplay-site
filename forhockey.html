@@ -415,59 +415,102 @@
 
      
 
-      <!-- SECTION: FOR COACHES -->
-      <section class="fh-section fh-section-grey" id="for-coaches">
-        <div class="container">
-          <div class="fh-section-head">
-            <h2 class="fh-h2">
-              Add structured cognitive training to your sessions — built to help<br />
-              coaches and training businesses grow.
-            </h2>
-          </div>
+     <!-- SECTION: FOR COACHES (matches HERO tiles exactly, no videos) -->
+<section class="fh-section fh-section-grey" id="for-coaches">
+  <div class="container">
+    <div class="fh-section-head">
+      <h2 class="fh-h2">
+        Add structured cognitive training to your sessions — built to help coaches and training businesses grow.
+      </h2>
+    </div>
+  </div>
 
-          <div class="fh-tile-row fh-tile-grid" aria-label="For coaches tiles">
-            <article class="fh-tile fh-tile-dark fh-tile-tall">
-              <div class="fh-tile-body">
-                <h3 class="fh-tile-title">Promote your business</h3>
-                <p class="fh-tile-text">
-                  Share your drills with us and we will promote your business in app.
-                </p>
-              </div>
-              <div class="fh-tile-media fh-tile-media-bottom">
-                <div class="fh-media-video">
-                  <video class="cf-video" playsinline muted loop preload="metadata"
-                    data-hls="https://customer-hev71calbt8qvapr.cloudflarestream.com/cfd2198df7d205910f7d1cfbff7f70d6/manifest/video.m3u8"></video>
-                </div>
-              </div>
-            </article>
+  <div class="container">
+    <!-- ✅ Use the SAME wrapper class as hero tiles -->
+    <div class="fh-bleed fh-hero-tiles" aria-label="For coaches highlights">
+      <div class="fh-tile-row">
+        <button
+          class="fh-row-nav fh-row-prev"
+          type="button"
+          aria-label="Previous"
+          data-scroll-target="#coachTiles"
+        >
+          ‹
+        </button>
 
-            <article class="fh-tile fh-tile-light fh-tile-tall">
-              <div class="fh-tile-body">
-                <h3 class="fh-tile-title">The Future of Hockey</h3>
-                <p class="fh-tile-text">
-                  Equip players with the decision-making speed and reaction readiness today’s game demands.
-                </p>
-                <button class="fh-pill-btn" type="button">Play Podcast</button>
-              </div>
-            </article>
+        <!-- ✅ Same scroller classes as hero -->
+        <div class="fh-scroller fh-tiles" id="coachTiles">
 
-            <article class="fh-tile fh-tile-light fh-tile-tall">
-              <div class="fh-tile-body">
-                <h3 class="fh-tile-title">At Home</h3>
-                <p class="fh-tile-text">
-                  Train at home with your head up, scanning and reacting.
-                </p>
-              </div>
-              <div class="fh-tile-media fh-tile-media-bottom">
-                <div class="fh-media-video">
-                  <video class="cf-video" playsinline muted loop preload="metadata"
-                    data-hls="https://customer-hev71calbt8qvapr.cloudflarestream.com/cfd2198df7d205910f7d1cfbff7f70d6/manifest/video.m3u8"></video>
-                </div>
-              </div>
-            </article>
-          </div>
+          <!-- Tile 1 -->
+          <article class="fh-tile fh-tile-dark">
+            <div class="fh-tile-body">
+              <div class="fh-tile-eyebrow">For Coaches</div>
+              <h3 class="fh-tile-title">Promote your business</h3>
+              <p class="fh-tile-text">
+                Share your drills with us and we’ll help feature your business in-app.
+              </p>
+            </div>
+            <!-- ✅ Use hero-style image block -->
+            <div class="fh-tile-media fh-tile-media-bottom">
+              <img src="assets/images/forhockey/coach-tile-1.png" alt="Promote your coaching business" />
+            </div>
+          </article>
+
+          <!-- Tile 2 -->
+          <article class="fh-tile fh-tile-light">
+            <div class="fh-tile-body">
+              <div class="fh-tile-eyebrow">Training Businesses</div>
+              <p class="fh-tile-text">
+             Grow Your Revenue with Cognitive Training. Offer structured scanning, reaction, and visual decision-making sessions that help athletes perform — and help your business scale. </p>
+            </div>
+            <div class="fh-tile-media fh-tile-media-bottom">
+              <img src="assets/images/forhockey/coach-tile-2.png" alt="Structured session templates" />
+            </div>
+          </article>
+
+          <!-- Tile 3 -->
+          <article class="fh-tile fh-tile-light fh-tile-custom">
+            <div class="fh-tile-body">
+              <div class="fh-tile-eyebrow">Teams</div>
+              <h3 class="fh-tile-title">Team packages</h3>
+              <p class="fh-tile-text">
+                Build a repeatable cognitive warmup your whole team can run together — on-ice or off-ice.
+              </p>
+            </div>
+            <div class="fh-tile-media fh-tile-media-bottom">
+              <img src="assets/images/forhockey/coach-tile-3.png" alt="Team training packages" />
+            </div>
+          </article>
+
+          <!-- Tile 4 -->
+          <article class="fh-tile fh-tile-dark">
+            <div class="fh-tile-body">
+              <div class="fh-tile-eyebrow">Coming Soon</div>
+              <h3 class="fh-tile-title">Coach tools + library</h3>
+              <p class="fh-tile-text">
+                Save screens, build sessions faster, and tap into a growing drill library.
+              </p>
+            </div>
+            <div class="fh-tile-media fh-tile-media-bottom">
+              <img src="assets/images/forhockey/coach-tile-4.png" alt="Coach tools and drill library" />
+            </div>
+          </article>
+
         </div>
-      </section>
+
+        <button
+          class="fh-row-nav fh-row-next"
+          type="button"
+          aria-label="Next"
+          data-scroll-target="#coachTiles"
+        >
+          ›
+        </button>
+      </div>
+    </div>
+  </div>
+</section>
+
 
       <!-- SECTION: HOW IT WORKS -->
       <section class="fh-section fh-how" id="how-it-works">

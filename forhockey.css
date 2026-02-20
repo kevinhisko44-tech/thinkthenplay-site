@@ -570,6 +570,26 @@ font-weight: 500;
   font-size: 12px;
 }
 
+* ✅ Coach tiles: match HERO tile sizing + image behaviour exactly */
+#coachTiles .fh-tile{
+  width: 310px;
+  min-width: 310px;
+  max-width: 310px;
+  height: 450px;
+}
+
+#coachTiles .fh-tile-media{
+  padding: 0;
+  margin: 0;
+}
+
+#coachTiles .fh-tile-media-bottom img{
+  width: 100%;
+  height: 250px;
+  object-fit: cover;
+  display: block;
+  border-radius: 0;
+}
 /* -------- How it works -------- */
 .fh-how{
   padding-top: 56px;
